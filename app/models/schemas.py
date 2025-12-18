@@ -3,6 +3,7 @@ from pydantic import BaseModel
 from datetime import datetime
 from typing import Optional, List
 from enum import Enum
+from pydantic import Field
 
 
 class UserRole(str, Enum):
@@ -25,7 +26,7 @@ class UserCreate(BaseModel):
     """User creation schema"""
     username: str
     email: str
-    password: str
+    password: str = Field(min_length=8, max_length=72)
     role: UserRole = UserRole.PATIENT
 
 
